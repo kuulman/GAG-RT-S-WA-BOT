@@ -20,6 +20,7 @@ git clone https://github.com/kuulman/GAG-RT-S-WA-BOT
 cd GAG-RT-S-WA-BOT
 ```
 # Install Dependency
+```
 npm install
 ```
 # Install all packages
