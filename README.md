@@ -14,6 +14,10 @@ Whatsapp Bot for Real Time Grow a Garden Stock!
 - [axios](https://www.npmjs.com/package/axios)
 - [pm2 (optional)](https://www.npmjs.com/package/pm2)
 
+# Clone this repo
+```
+git clone https://github.com/kuulman/GAG-RT-S-WA-BOT
+cd GAG-RT-S-WA-BOT
 # Install Dependency
 ```
 npm install
