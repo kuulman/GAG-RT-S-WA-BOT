@@ -1,4 +1,4 @@
-<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/f285f4d0-fa2f-4978-b121-01ec61ea28b8" /># GAG-RT-S WA BOT Version 1.5
+# GAG-RT-S WA BOT Version 1.5
 Whatsapp Bot for Real Time Grow a Garden Stock!
 
 # Requirement:
