@@ -1,12 +1,11 @@
-# wa-stock-bot
-Whatsapp Bot for Grow a Garden Stock!
+# GAG-RT-S WA BOT Version 1.5
+Whatsapp Bot for Real Time Grow a Garden Stock!
 
-Modules for this bot (not included in this file)
+Modules needed for this bot
 - whatsapp-web.js
 - puppeteer-core
 - qrcode-terminal
 - dotenv (for token file)
 - express
+- pm2 (optional)
 Full version see at package.json
-
-- Carz Ken -
