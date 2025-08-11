@@ -3,7 +3,7 @@ const express =  require('express')
 const qrcode = require('qrcode-terminal')
 const axios = require('axios')
 const { Client: discordClient, GatewayIntentBits } = require('discord.js')
-const { LocalAuth, Client } = require('whatsapp-web.js')
+const { LocalAuth, Client, MessageMedia } = require('whatsapp-web.js')
 const os = require('os');
 
 const app = express()
@@ -52,12 +52,15 @@ waClient.on('message', async message =>{ // Function for checking messages
     if (message.from == '120363419338640318@newsletter') { // Check if the message is from a selected group
      console.log(message.from + ' has sent you message: ', messageBody); // Write that message to console
     } 
-    if (message.body.toLowerCase() == "bot_info") { // Bot authors commands
-        const thumbnail = MessageMedia.fromFilePath('./thumbnail.png')
-        await message.reply(thumbnail, { 
-            caption:'*Info GAG RT-S Bot Info*\n_Version 1.5 (Vulcano)_\n\n_Changes:_\n- New Command for Admin\n- Changes `bot_authors` to `bot_info` command and update the response\n- From now, bot will be send the rare stock to the Whatsapp Channels not to group again. Group will be shutdown after this bot updates.\n\nCreated by: _@kucingpintar & @owlhouse22_\n\n© Copyright Info GAG. All rights reserved. \nThis bot retrives data from vulcanvalues.com'
-        }) 
-        console.log("Berhasil mengirimkan jawaban untuk command bot_authors") // Credits Information
+    if (message.body.toLowerCase() === "bot_info") {
+      const chat = await message.getChat();
+      const thumbnail = await MessageMedia.fromFilePath('./Thumbnail.png');
+    
+      await waClient.sendMessage(chat.id._serialized, thumbnail, {
+        caption: '*Info GAG RT-S Bot Info*\n_Version 1.5 (Vulcano)_\n\n_Changes:_\n- New Command for Admin\n- Changes `bot_authors` to `bot_info` command and update the response\n- From now, bot will be send the rare stock to the Whatsapp Channels not to group again. Group will be shutdown after this bot updates.\n\nCreated by: _@kucingpintar & @owlhouse22_\n\n© Copyright Info GAG. All rights reserved. \nThis bot retrives data from vulcanvalues.com'
+      });
+
+      console.log("Berhasil mengirimkan jawaban untuk command bot_info");
     }
     if (message.body.toLowerCase() == "server_usage") { // Server usage command
         (async () => {
@@ -66,6 +69,19 @@ waClient.on('message', async message =>{ // Function for checking messages
             console.log(`📊 Server CPU and RAM Usage \n\n${ramUsage} (All memory usage in server. Include from OS) \n*CPU Usage:* ${cpuUsage}% (This bot CPU usage)`) // Server Usage Information
             await message.reply(`📊 Server CPU and RAM Usage \n\n${ramUsage} (All memory usage in server. Include from OS) \n*CPU Usage:* ${cpuUsage}% (This bot CPU usage)`); // Send the server usage to WA Group
         })()
+    }
+    if (message.body.toLowerCase() == "bot_ping") {
+        try {
+            const startTime = Date.now(); // Start Time
+            const reply = await message.reply('Calculate bot ping'); 
+            const endTime = Date.now(); // End Time
+            const ping = endTime - startTime; // Calculate ping
+            await reply.edit(`Bot ping: ${ping} ms \n` ); // Edit the message to show the ping
+            console.log(`Bot ping: ${ping} ms`); // Write the ping to console
+        } catch (error) {
+            console.error('Error calculating ping:', error); // If there is an error, write it to console
+            await message.reply('Error calculating ping.'); // Send error message to WA Group
+        }
     }
 
 })
@@ -153,7 +169,7 @@ dcClient.on('messageCreate', async (message) => { // Message Event for the stock
             const year = now.getFullYear();
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
-            return `${day} ${month} ${year}, ${hours}:${minutes} WIB`;
+            return `${day} ${month} ${year}, ${hours}:${minutes} WITA (GMT+8)`;
         }
 
 
